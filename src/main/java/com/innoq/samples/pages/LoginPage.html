@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<wicket:extend>
+    <h2>Congratulations!</h2>
+    <p>
+        You have found the login page. Now try to login.
+    </p>
+    <h3>Get started</h3>
+    <div>
+        <form wicket:id="form">
+        <div wicket:id="feedback"/>
+        <div>
+            <label for="username">Username:</label>
+            <input id="username" wicket:id="username"/>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" wicket:id="password"/>
+        </div>
+        <div>
+            <button wicket:id="login">Login</button>
+        </div>
+        </form>
+    </div>
+    <p>
+        Wicket version <wicket:container wicket:id="version">[version]</wicket:container>.
+    </p>
+</wicket:extend>
+</html>

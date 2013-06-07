@@ -19,11 +19,17 @@ body { margin:0;padding:0;}
 	border-top : 1px solid #888;
 	z-index : 0;
 }
-#logo,#bd {
+#topline {
+    display: block;
 	width : 650px;
 	margin: 0 auto;
-	padding: 25px 50px 0 50px;
+	padding: 0px 50px 0 50px;
 }
+#logo {
+    float:left;
+    width: 400px;
+}
+
 #logo h1 {
 	color : white;
 	font-size:36pt;
@@ -36,7 +42,22 @@ body { margin:0;padding:0;}
 	margin-right : 5px;
 }
 body { margin-top : 0; padding-top : 0;}
+
+#bd {
+    width : 650px;
+    margin: 0 auto;
+    padding: 25px 50px 0 50px;
+}
+
 #logo, #logo h1 { margin-top : 0; padding-top : 0;}
+
+#header-info {
+    padding-top:15px;
+    float:left;
+    color: #fff;
+    font-size: 0.8em;
+}
+
 #bd {
 	position : absolute;
 	top : 75px;
@@ -53,6 +74,7 @@ body { margin-top : 0; padding-top : 0;}
 	-webkit-box-shadow: 0px 0px 10px #888;
 	box-shadow: 0px 0px 10px #888;
 }
+
 a, a:visited, a:hover, a:active {
 	color : #6493D2;
 }
@@ -65,4 +87,9 @@ h3 {
 	padding : 0; margin:0;
 	font-size:24pt;
 	color:#092E67;
+}
+
+label {
+    display: inline-block;
+    min-width: 120px;
 }

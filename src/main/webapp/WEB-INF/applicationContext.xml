@@ -7,4 +7,16 @@
     <bean id="wicketApplication" class="com.innoq.samples.WicketApplication">
     </bean>
 
+    <bean id="calendarManager" class="com.innoq.samples.connectors.mocks.MockCalendarManagement">
+        <constructor-arg index="0" value="1"/>
+    </bean>
+
+    <bean id="projectManager" class="com.innoq.samples.connectors.mocks.MockProjectManagement">
+        <constructor-arg index="0" value="2"/>
+    </bean>
+
+    <bean id="financialService" class="com.innoq.samples.connectors.mocks.MockFinancialService">
+        <constructor-arg index="0" value="5"/>
+    </bean>
+
 </beans>
