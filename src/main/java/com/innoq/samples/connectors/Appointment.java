@@ -1,5 +1,6 @@
 package com.innoq.samples.connectors;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Appointment {
@@ -29,6 +30,14 @@ public class Appointment {
 
     // ----------------------------------------------------
 
+    public Date getDay() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(start);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        return cal.getTime();
+    }
 
     public Date getStart() {
         return start;
@@ -76,7 +85,6 @@ public class Appointment {
     }
 
     // ----------------------------------------------------
-
 
     @Override
     public String toString() {

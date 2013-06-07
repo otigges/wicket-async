@@ -30,7 +30,7 @@ public class LoginPage extends BasePage {
             @Override
             public void onSubmit() {
                 WasyncSession.get().setUsername(model.getObject().getUsername());
-                setResponsePage(FinancialStatusPage.class);
+                setResponsePage(DashBoardPage.class);
             }
         });
 

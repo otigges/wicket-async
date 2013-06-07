@@ -1,0 +1,38 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.5-strict.dtd">
+<wicket:panel>
+    <div>
+        <h3>Your appointments</h3>
+        <table>
+            <tr>
+                <th>Day</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Customer</th>
+                <th>Location</th>
+                <th>Subject</th>
+            </tr>
+            <tr wicket:id="appointments">
+                <td>
+                    <wicket:container wicket:id="day">[day]</wicket:container>
+                </td>
+                <td>
+                    <wicket:container wicket:id="start">[start]</wicket:container>
+                </td>
+                <td>
+                    <wicket:container wicket:id="end">[end]</wicket:container>
+                </td>
+                <td>
+                    <wicket:container wicket:id="customer">[customer]</wicket:container>
+                </td>
+                <td>
+                    <wicket:container wicket:id="location">[location]</wicket:container>
+                </td>
+                <td>
+                    <wicket:container wicket:id="subject">[subject]</wicket:container>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</wicket:panel>
+</html>

@@ -1,4 +1,4 @@
-body, p, li, a { font-family: georgia, times, serif;font-size:13pt;}
+body, p, li, a { font-family: "Helvetic Neue", Helvetica, Arial, serif;font-size:9pt;}
 h1, h2, h3 { font-family: 'Yanone Kaffeesatz', arial, serif; }
 body { margin:0;padding:0;}
 #hd {
@@ -92,4 +92,20 @@ h3 {
 label {
     display: inline-block;
     min-width: 120px;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+th {
+    border: 1px solid #bbb;
+    background: #dddedf;
+    padding: 2px 4px;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding: 2px 4px;
 }

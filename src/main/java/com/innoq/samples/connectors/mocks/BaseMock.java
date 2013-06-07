@@ -30,31 +30,31 @@ public class BaseMock {
     };
 
     private final List<String> subjects = Arrays.asList(
-            "Review meeting.",
-            "Planning.",
-            "Retrospektive.",
-            "Team event.",
-            "Looking for new projects.",
-            "Coffee and Cookies.",
-            "Emergency meeting.",
-            "Price negotiations.",
-            "Project kickoff.",
-            "Technical workshop.",
-            "Sell some stuff."
+            "Review meeting",
+            "Planning",
+            "Retrospective",
+            "Team event",
+            "Looking for new projects",
+            "Coffee and Cookies",
+            "Emergency meeting",
+            "Price negotiations",
+            "Project kickoff",
+            "Technical workshop",
+            "Sell some stuff"
     );
 
     private final List<String> titles = Arrays.asList(
-            "Redesign engine.",
-            "New prototype.",
-            "Documentation.",
-            "Enterprise Architecture Stuff.",
-            "Remove legacy apps.",
-            "Code metrics.",
-            "SOAP Workshops.",
-            "Green IT.",
-            "Test support.",
-            "Security testing.",
-            "General project support."
+            "Redesign engine",
+            "New prototype",
+            "Documentation",
+            "Enterprise Architecture Stuff",
+            "Remove legacy apps",
+            "Code metrics",
+            "SOAP Workshops",
+            "Green IT",
+            "Test support",
+            "Security testing",
+            "General project support"
     );
 
     private final List<String> phases = Arrays.asList(
