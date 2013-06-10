@@ -1,5 +1,6 @@
 package com.innoq.samples.connectors;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class FinancialStatus {
+public class FinancialStatus implements Serializable {
 
     private List<FinancialEntry> entries = new ArrayList<FinancialEntry>();
 

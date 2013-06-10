@@ -1,5 +1,6 @@
 package com.innoq.samples.models;
 
+import com.innoq.samples.cache.CacheKey;
 import com.innoq.samples.connectors.FinancialService;
 import com.innoq.samples.connectors.FinancialStatus;
 import com.innoq.samples.models.base.LoadableDetachableModel;
@@ -15,6 +16,11 @@ public class FinancialStatusModel extends LoadableDetachableModel<FinancialStatu
     @Override
     protected FinancialStatus load() {
         return fs.getFinancialStatus("me");
+    }
+
+    @Override
+    protected CacheKey key() {
+        return CacheKey.from(FinancialStatus.class, "me");
     }
 
 }

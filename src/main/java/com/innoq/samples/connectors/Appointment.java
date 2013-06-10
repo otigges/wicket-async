@@ -1,9 +1,10 @@
 package com.innoq.samples.connectors;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Appointment {
+public class Appointment implements Serializable {
 
     private Date start;
 

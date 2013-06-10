@@ -1,5 +1,6 @@
 package com.innoq.samples.models;
 
+import com.innoq.samples.cache.CacheKey;
 import com.innoq.samples.connectors.Appointment;
 import com.innoq.samples.connectors.CalenderManagement;
 import com.innoq.samples.models.base.LoadableDetachableModel;
@@ -17,6 +18,11 @@ public class AppointmentModel extends LoadableDetachableModel<List<Appointment>>
     @Override
     protected List<Appointment> load() {
         return cm.loadAppointments("me");
+    }
+
+    @Override
+    protected CacheKey key() {
+        return CacheKey.from(Appointment.class, "me");
     }
 
 }

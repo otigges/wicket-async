@@ -1,5 +1,6 @@
 package com.innoq.samples.models;
 
+import com.innoq.samples.cache.CacheKey;
 import com.innoq.samples.connectors.Project;
 import com.innoq.samples.connectors.ProjectManagement;
 import com.innoq.samples.models.base.LoadableDetachableModel;
@@ -19,4 +20,8 @@ public class ProjectsModel extends LoadableDetachableModel<List<Project>> {
         return pm.loadProjects("me");
     }
 
+    @Override
+    protected CacheKey key() {
+        return CacheKey.from(Project.class, "me");
+    }
 }

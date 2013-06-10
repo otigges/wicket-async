@@ -1,9 +1,10 @@
 package com.innoq.samples.connectors;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
-public class FinancialEntry {
+public class FinancialEntry implements Serializable {
 
     private String project;
 

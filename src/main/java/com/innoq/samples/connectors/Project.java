@@ -1,6 +1,8 @@
 package com.innoq.samples.connectors;
 
-public class Project {
+import java.io.Serializable;
+
+public class Project implements Serializable {
 
     private String id;
 

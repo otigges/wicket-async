@@ -1,5 +1,6 @@
 package com.innoq.samples.models.base;
 
+import com.innoq.samples.cache.CacheKey;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.IModel;
 
@@ -40,6 +41,8 @@ public abstract class LoadableDetachableModel<T> implements IModel<T> {
     // ----------------------------------------------------
 
     protected abstract T load();
+
+    protected abstract CacheKey key();
 
     protected T getDefault() {
         return null;
