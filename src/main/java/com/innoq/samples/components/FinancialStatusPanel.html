@@ -1,0 +1,30 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.5-strict.dtd">
+<wicket:panel>
+    <div>
+        <h3>Current financial status</h3>
+        <table>
+            <tr>
+                <th>Project</th>
+                <th>Customer</th>
+                <th>Revenue</th>
+                <th>Profit</th>
+            </tr>
+            <tr wicket:id="entries">
+                <td>
+                    <wicket:container wicket:id="project">[project]</wicket:container>
+                </td>
+                <td>
+                    <wicket:container wicket:id="customer">[customer]</wicket:container>
+                </td>
+                <td>
+                    <wicket:container wicket:id="revenue">[revenue]</wicket:container>
+                </td>
+                <td>
+                    <wicket:container wicket:id="profit">[profit]</wicket:container>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</wicket:panel>
+</html>

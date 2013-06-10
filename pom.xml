@@ -25,6 +25,7 @@
 	<properties>
 		<wicket.version>6.8.0</wicket.version>
         <spring.version>3.2.3.RELEASE</spring.version>
+        <ehcache.version>2.6.6</ehcache.version>
 		<jetty.version>7.6.3.v20120416</jetty.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -60,6 +61,12 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- EH Cache -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>${ehcache.version}</version>
+        </dependency>
 
 		<!-- LOGGING DEPENDENCIES - LOG4J -->
 		<dependency>

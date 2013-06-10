@@ -8,15 +8,15 @@
     </bean>
 
     <bean id="calendarManager" class="com.innoq.samples.connectors.mocks.MockCalendarManagement">
-        <constructor-arg index="0" value="1000"/>
+        <constructor-arg index="0" value="100"/>
     </bean>
 
     <bean id="projectManager" class="com.innoq.samples.connectors.mocks.MockProjectManagement">
-        <constructor-arg index="0" value="2000"/>
+        <constructor-arg index="0" value="200"/>
     </bean>
 
     <bean id="financialService" class="com.innoq.samples.connectors.mocks.MockFinancialService">
-        <constructor-arg index="0" value="5000"/>
+        <constructor-arg index="0" value="400"/>
     </bean>
 
 </beans>
