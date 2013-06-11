@@ -38,6 +38,13 @@ public class LoginPage extends BasePage {
 
     }
 
+    // ----------------------------------------------------+
+
+    @Override
+    protected boolean needsAuthenticatedUser() {
+        return false;
+    }
+
     // ----------------------------------------------------
 
     class LoginData implements Serializable {

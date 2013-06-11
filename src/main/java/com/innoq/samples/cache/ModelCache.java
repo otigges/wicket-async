@@ -6,7 +6,6 @@ import net.sf.ehcache.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.Serializable;
 import java.net.URL;
 
 public class ModelCache {
@@ -29,16 +28,19 @@ public class ModelCache {
 
     // ----------------------------------------------------
 
-    public void put(CacheKey<?> key, Serializable entity) {
+    public void put(CacheKey<?> key, Object entity) {
         Element element = new Element(key, entity);
         cache.put(element);
+        LOGGER.debug("Cached element {}", key);
     }
 
     public <T> T get(CacheKey<T> key) {
         Element element = cache.get(key);
         if (element != null) {
+            LOGGER.debug("Cache hit for {}", key);
             return (T) element.getObjectValue();
         } else {
+            LOGGER.debug("Cache miss for {}", key);
             return null;
         }
     }

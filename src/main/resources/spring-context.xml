@@ -9,6 +9,9 @@
 
     <bean id="modelCache" class="com.innoq.samples.cache.ModelCache"/>
 
+    <bean id="executorService" class="com.innoq.samples.async.AsynchronousExecutor"
+          init-method="init" destroy-method="destroy" />
+
     <!-- Services -->
 
     <bean id="calendarManager" class="com.innoq.samples.connectors.mocks.MockCalendarManagement">

@@ -13,15 +13,24 @@ public class ProjectsModel extends LoadableDetachableModel<List<Project>> {
     @SpringBean
     private ProjectManagement pm;
 
+    private final String username;
+
+    // ----------------------------------------------------
+
+    public ProjectsModel(String username) {
+        this.username = username;
+    }
+
     // ----------------------------------------------------
 
     @Override
-    protected List<Project> load() {
-        return pm.loadProjects("me");
+    public CacheKey key() {
+        return CacheKey.from(Project.class, username);
     }
 
     @Override
-    protected CacheKey key() {
-        return CacheKey.from(Project.class, "me");
+    protected List<Project> load() {
+        return pm.loadProjects(username);
     }
+
 }

@@ -4,27 +4,31 @@ import java.io.Serializable;
 
 public class CacheKey<T> implements Serializable {
 
-    private final Class<T> entityClass;
+    private final String type;
 
     private final String id;
 
     // ----------------------------------------------------
 
     public static <T> CacheKey<T> from(Class<T> entityClass, String id) {
-        return new CacheKey<T>(entityClass, id);
+        return new CacheKey<T>(entityClass.getSimpleName(), id);
+    }
+
+    public static <T> CacheKey<T> from(String type, String id) {
+        return new CacheKey<T>(type, id);
     }
 
     // ----------------------------------------------------
 
-    public CacheKey(Class<T> entityClass, String id) {
-        this.entityClass = entityClass;
+    public CacheKey(String type, String id) {
+        this.type = type;
         this.id = id;
     }
 
     // ----------------------------------------------------
 
-    public Class<T> getEntityClass() {
-        return entityClass;
+    public String getType() {
+        return type;
     }
 
     public String getId() {
@@ -40,7 +44,7 @@ public class CacheKey<T> implements Serializable {
 
         CacheKey cacheKey = (CacheKey) o;
 
-        if (entityClass != null ? !entityClass.equals(cacheKey.entityClass) : cacheKey.entityClass != null)
+        if (type != null ? !type.equals(cacheKey.type) : cacheKey.type != null)
             return false;
         if (id != null ? !id.equals(cacheKey.id) : cacheKey.id != null) return false;
 
@@ -49,7 +53,7 @@ public class CacheKey<T> implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = entityClass != null ? entityClass.hashCode() : 0;
+        int result = type != null ? type.hashCode() : 0;
         result = 31 * result + (id != null ? id.hashCode() : 0);
         return result;
     }
@@ -57,7 +61,7 @@ public class CacheKey<T> implements Serializable {
     @Override
     public String toString() {
         return "CacheKey{" +
-                "entityClass=" + entityClass +
+                "type=" + type +
                 ", id='" + id + '\'' +
                 '}';
     }

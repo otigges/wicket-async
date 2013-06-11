@@ -11,16 +11,24 @@ public class FinancialStatusModel extends LoadableDetachableModel<FinancialStatu
     @SpringBean
     private FinancialService fs;
 
+    private final String username;
+
+    // ----------------------------------------------------
+
+    public FinancialStatusModel(String username) {
+        this.username = username;
+    }
+
     // ----------------------------------------------------
 
     @Override
-    protected FinancialStatus load() {
-        return fs.getFinancialStatus("me");
+    public CacheKey key() {
+        return CacheKey.from(FinancialStatus.class, username);
     }
 
     @Override
-    protected CacheKey key() {
-        return CacheKey.from(FinancialStatus.class, "me");
+    protected FinancialStatus load() {
+        return fs.getFinancialStatus(username);
     }
 
 }

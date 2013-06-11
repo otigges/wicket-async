@@ -4,6 +4,8 @@ import com.innoq.samples.WasyncSession;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.request.flow.RedirectToUrlException;
+import org.apache.wicket.request.flow.ResetResponseException;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class BasePage extends WebPage {
@@ -20,6 +22,10 @@ public class BasePage extends WebPage {
     // ----------------------------------------------------
 
     protected void init() {
+        if (needsAuthenticatedUser() && !isLoggedIn()) {
+            redirectToInterceptPage(new LoginPage());
+            return;
+        }
         Link logoutLink = new Link("logout") {
             @Override
             public void onClick() {
@@ -45,6 +51,10 @@ public class BasePage extends WebPage {
         } else {
             return "- not logged in -";
         }
+    }
+
+    protected boolean needsAuthenticatedUser() {
+        return true;
     }
 
 }
