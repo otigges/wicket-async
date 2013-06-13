@@ -6,16 +6,27 @@
 
     <div>
 
-        <div wicket:id="appointments" class="info-panel">
-            [list of appointments go here]
+
+        <div class="info-panel">
+            <h3>Your appointments</h3>
+            <div wicket:id="appointments">
+                [list of appointments go here]
+            </div>
         </div>
 
-        <div wicket:id="projects" class="info-panel">
-            [list of projects go here]
+        <div class="info-panel">
+            <h3>Your projects</h3>
+            <div wicket:id="projects">
+                [list of projects go here]
+            </div>
         </div>
 
-        <div wicket:id="financial-status" class="info-panel">
-            [financial status overview goes here]
+        <div class="info-panel">
+            <h3>Current financial status</h3>
+            <div wicket:id="financial-status">
+                [financial status overview goes here]
+            </div>
+            <a wicket:id="fs-details-link">&rarr; See details</a>
         </div>
 
     </div>

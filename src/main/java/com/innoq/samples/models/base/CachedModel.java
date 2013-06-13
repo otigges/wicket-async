@@ -1,13 +1,9 @@
 package com.innoq.samples.models.base;
 
-import com.innoq.samples.cache.CacheKey;
 import com.innoq.samples.cache.ModelCache;
-import org.apache.wicket.injection.Injector;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-public class CachedModel<T> implements LoadableModel<T> {
-
-    private LoadableModel<T> target;
+public class CachedModel<T> extends ChainedLoadableModel<T> {
 
     private T attached;
 
@@ -23,8 +19,7 @@ public class CachedModel<T> implements LoadableModel<T> {
     // ----------------------------------------------------
 
     public CachedModel(LoadableModel<T> target) {
-        Injector.get().inject(this);
-        this.target = target;
+        super(target);
     }
 
     // ----------------------------------------------------
@@ -34,13 +29,13 @@ public class CachedModel<T> implements LoadableModel<T> {
         if(attached != null) {
             return attached;
         }
-        T cached = (T) cache.get(target.key());
+        T cached = (T) cache.get(key());
         if (cached != null) {
             attached = cached;
             return cached;
         }
-        attached= target.getObject();
-        cache.put(target.key(), attached);
+        attached = getChainedModelObject();
+        cache.put(key(), attached);
         return attached;
     }
 
@@ -51,12 +46,8 @@ public class CachedModel<T> implements LoadableModel<T> {
 
     @Override
     public void detach() {
+        super.detach();
         attached = null;
-        target.detach();
     }
 
-    @Override
-    public CacheKey key() {
-        return target.key();
-    }
 }

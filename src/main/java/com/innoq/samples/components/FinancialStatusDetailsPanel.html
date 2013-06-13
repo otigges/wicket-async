@@ -3,13 +3,17 @@
     <div>
         <table>
             <tr>
-                <th>Effective date</th>
+                <th>Project</th>
+                <th>Customer</th>
                 <th>Revenue</th>
                 <th>Profit</th>
             </tr>
-            <tr >
+            <tr wicket:id="entries">
                 <td>
-                    <wicket:container wicket:id="date">[date]</wicket:container>
+                    <wicket:container wicket:id="project">[project]</wicket:container>
+                </td>
+                <td>
+                    <wicket:container wicket:id="customer">[customer]</wicket:container>
                 </td>
                 <td>
                     <wicket:container wicket:id="revenue">[revenue]</wicket:container>

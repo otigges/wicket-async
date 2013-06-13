@@ -12,12 +12,12 @@ public class FinancialStatus implements Serializable {
 
     private List<FinancialEntry> entries = new ArrayList<FinancialEntry>();
 
-    private Date effectiveData;
+    private Date effectiveDate;
 
     // ----------------------------------------------------
 
     public FinancialStatus(Date effectiveData) {
-        this.effectiveData = effectiveData;
+        this.effectiveDate = effectiveData;
     }
 
     // ----------------------------------------------------
@@ -30,8 +30,8 @@ public class FinancialStatus implements Serializable {
         return entries;
     }
 
-    public Date getEffectiveData() {
-        return effectiveData;
+    public Date getEffectiveDate() {
+        return effectiveDate;
     }
 
     public BigDecimal getRevenue() {
@@ -56,7 +56,7 @@ public class FinancialStatus implements Serializable {
     public String toString() {
         NumberFormat fmt = NumberFormat.getCurrencyInstance();
         return "FinancialStatus{" +
-                ", effectiveData='" + effectiveData + '\'' +
+                ", effectiveDate='" + effectiveDate + '\'' +
                 ", revenue='" + fmt.format(getRevenue().doubleValue()) + '\'' +
                 ", profit='" + fmt.format(getProfit().doubleValue()) + '\'' +
                 '}';

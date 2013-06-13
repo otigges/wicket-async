@@ -1,15 +1,13 @@
 package com.innoq.samples.models.base;
 
 import com.innoq.samples.async.AsynchronousExecutor;
-import com.innoq.samples.cache.CacheKey;
-import org.apache.wicket.injection.Injector;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class AsyncModel<T> implements LoadableModel<T> {
+public class AsyncModel<T> extends ChainedLoadableModel<T> {
 
     enum State {
         NEW,
@@ -19,14 +17,10 @@ public class AsyncModel<T> implements LoadableModel<T> {
 
     private final ReentrantLock lock = new ReentrantLock();
 
-    private final LoadableModel<T> target;
+    private State state = State.NEW;
 
     @SpringBean
     private AsynchronousExecutor executor;
-
-    private State state = State.NEW;
-
-    private Future<T> future;
 
     // ----------------------------------------------------
 
@@ -37,8 +31,7 @@ public class AsyncModel<T> implements LoadableModel<T> {
     // ----------------------------------------------------
 
     public AsyncModel(LoadableModel<T> target) {
-        Injector.get().inject(this);
-        this.target = target;
+        super(target);
     }
 
     // ----------------------------------------------------
@@ -47,7 +40,7 @@ public class AsyncModel<T> implements LoadableModel<T> {
         lock.lock();
         try {
             if (State.NEW.equals(state)) {
-                future = executor.submit(this);
+                executor.submit(this);
                 state = State.LOADING;
             }
         } finally {
@@ -59,13 +52,17 @@ public class AsyncModel<T> implements LoadableModel<T> {
     public T load() {
         lock.lock();
         try {
-            return target.getObject();
+            return getChainedModelObject();
         } finally {
             state = State.DONE;
             lock.unlock();
         }
     }
 
+    public boolean isDone() {
+        checkState();
+        return State.DONE.equals(state);
+    }
     // ----------------------------------------------------
 
     @Override
@@ -76,9 +73,10 @@ public class AsyncModel<T> implements LoadableModel<T> {
                 case NEW:
                     return load();
                 case LOADING:
-                    return waitAndGet();
+                    waitUntilDone();
+                    return getChainedModelObject();
                 case DONE:
-                    return target.getObject();
+                    return getChainedModelObject();
                 default:
                     throw new IllegalStateException("Unexpected state: " + state);
             }
@@ -88,32 +86,26 @@ public class AsyncModel<T> implements LoadableModel<T> {
         }
     }
 
-    @Override
-    public void setObject(T object) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public CacheKey key() {
-        return target.key();
-    }
-
-    @Override
-    public void detach() {
-        target.detach();
-        future = null;
-    }
-
     // ----------------------------------------------------
 
-    private T waitAndGet() {
+    private void checkState() {
+        if (State.LOADING.equals(state) && future().isDone()) {
+            state = State.DONE;
+        }
+    }
+
+    private void waitUntilDone() {
         try {
-            return future.get();
+            future().get();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Future<T> future() {
+        return executor.submit(this);
     }
 
 }

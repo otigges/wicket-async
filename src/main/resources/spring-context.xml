@@ -9,21 +9,23 @@
 
     <bean id="modelCache" class="com.innoq.samples.cache.ModelCache"/>
 
-    <bean id="executorService" class="com.innoq.samples.async.AsynchronousExecutor"
-          init-method="init" destroy-method="destroy" />
+    <bean id="executorService" class="com.innoq.samples.async.AsynchronousExecutorImpl"
+          destroy-method="destroy">
+        <constructor-arg ref="modelCache"/>
+    </bean>
 
     <!-- Services -->
 
     <bean id="calendarManager" class="com.innoq.samples.connectors.mocks.MockCalendarManagement">
-        <constructor-arg index="0" value="1000"/>
+        <constructor-arg index="0" value="1200"/>
     </bean>
 
     <bean id="projectManager" class="com.innoq.samples.connectors.mocks.MockProjectManagement">
-        <constructor-arg index="0" value="2000"/>
+        <constructor-arg index="0" value="1800"/>
     </bean>
 
     <bean id="financialService" class="com.innoq.samples.connectors.mocks.MockFinancialService">
-        <constructor-arg index="0" value="4000"/>
+        <constructor-arg index="0" value="3900"/>
     </bean>
 
 </beans>

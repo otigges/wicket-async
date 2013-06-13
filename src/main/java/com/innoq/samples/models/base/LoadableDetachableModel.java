@@ -2,15 +2,9 @@ package com.innoq.samples.models.base;
 
 import org.apache.wicket.injection.Injector;
 
-public abstract class LoadableDetachableModel<T> implements LoadableModel<T> {
+public abstract class LoadableDetachableModel<T> extends AbstractLoadableModel<T> {
 	
     private T loaded;
-
-    // ----------------------------------------------------
-
-    public LoadableDetachableModel() {
-        Injector.get().inject(this);
-    }
 
     // ----------------------------------------------------
 
@@ -24,11 +18,6 @@ public abstract class LoadableDetachableModel<T> implements LoadableModel<T> {
         } else {
             return getDefault();
         }
-    }
-
-    @Override
-    public void setObject(final T loaded) {
-        this.loaded = loaded;
     }
 
     @Override

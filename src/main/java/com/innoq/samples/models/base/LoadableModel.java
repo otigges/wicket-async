@@ -7,4 +7,6 @@ public interface LoadableModel<T> extends IModel<T> {
 
     CacheKey key();
 
+    LoadableModel<T> getChainedModel();
+
 }

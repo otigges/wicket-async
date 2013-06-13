@@ -94,6 +94,7 @@ label {
 table {
     border-collapse: collapse;
     border: 1px solid #ccc;
+    width: 450px;
 }
 
 th {
@@ -110,4 +111,9 @@ td {
 div.info-panel {
     float: left;
     margin: 10px;
+}
+
+div.lazy-loading-placeholder {
+    width: 450px;
+    border: 1px solid #ccc;
 }
