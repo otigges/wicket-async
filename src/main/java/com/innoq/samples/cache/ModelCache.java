@@ -45,4 +45,14 @@ public class ModelCache {
         }
     }
 
+    public boolean contains(CacheKey key) {
+        return cache.get(key) != null;
+    }
+
+    // ----------------------------------------------------
+
+    public double getCacheSize() {
+        return cache.calculateInMemorySize() / 1024.;
+    }
+
 }

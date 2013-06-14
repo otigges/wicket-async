@@ -28,6 +28,10 @@ public class AsyncModel<T> extends ChainedLoadableModel<T> {
         return new AsyncModel<S>(model).start();
     }
 
+    public static void prefetch(LoadableModel model) {
+        new AsyncModel(model).prefetch();
+    }
+
     // ----------------------------------------------------
 
     public AsyncModel(LoadableModel<T> target) {
@@ -47,6 +51,10 @@ public class AsyncModel<T> extends ChainedLoadableModel<T> {
             lock.unlock();
         }
         return this;
+    }
+
+    public void prefetch() {
+        executor.prefetch(this);
     }
 
     public T load() {

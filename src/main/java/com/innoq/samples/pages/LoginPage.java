@@ -1,6 +1,8 @@
 package com.innoq.samples.pages;
 
 import com.innoq.samples.WasyncSession;
+import com.innoq.samples.models.FinancialDetailsModel;
+import com.innoq.samples.models.base.AsyncModel;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
@@ -8,34 +10,33 @@ import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.Model;
 
 import java.io.Serializable;
 
 public class LoginPage extends BasePage {
 
 	public LoginPage() {
-
-		add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
-
-        final Model<LoginData> model = Model.of(new LoginData());
-
-        Form form = new Form("form", new CompoundPropertyModel(model));
-
+        final Form<LoginData> form = new Form<LoginData>("form", new CompoundPropertyModel<LoginData>(new LoginData()));
         form.add(new FeedbackPanel("feedback"));
         form.add(new TextField<String>("username"));
         form.add(new PasswordTextField("password"));
-
         form.add(new Button("login") {
             @Override
             public void onSubmit() {
-                WasyncSession.get().setUsername(model.getObject().getUsername());
-                setResponsePage(DashBoardPage.class);
+                onLogin(form.getModelObject().getUsername());
             }
         });
-
         add(form);
+        add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
+    }
 
+    // ----------------------------------------------------
+
+    public void onLogin(String user) {
+        WasyncSession.get().setUsername(user);
+        setResponsePage(DashBoardPage.class);
+
+        AsyncModel.prefetch(new FinancialDetailsModel(user));
     }
 
     // ----------------------------------------------------+

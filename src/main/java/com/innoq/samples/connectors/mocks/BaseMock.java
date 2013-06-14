@@ -17,7 +17,7 @@ public class BaseMock {
         {
             put("Apple Inc.", "Cupertino");
             put("Microsoft", "Redmond");
-            put("Deutsche Post AG", "Bonn");
+            put("Deutsche Post", "Bonn");
             put("BMW AG", "Munich");
             put("Boing", "Seatle");
             put("Unicredit S.p.A.", "Rome");
@@ -34,7 +34,7 @@ public class BaseMock {
             "Planning",
             "Retrospective",
             "Team event",
-            "Looking for new projects",
+            "Looking for projects",
             "Coffee and Cookies",
             "Emergency meeting",
             "Price negotiations",
@@ -47,7 +47,7 @@ public class BaseMock {
             "Redesign engine",
             "New prototype",
             "Documentation",
-            "Enterprise Architecture Stuff",
+            "EAM Stuff",
             "Remove legacy apps",
             "Code metrics",
             "SOAP Workshops",
@@ -59,7 +59,7 @@ public class BaseMock {
 
     private final List<String> phases = Arrays.asList(
             "Inception",
-            "Requirements Engineering",
+            "Req. Engineering",
             "Development",
             "Testing",
             "Certification",

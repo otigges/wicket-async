@@ -10,44 +10,32 @@ import java.util.List;
 
 public class FinancialStatus implements Serializable {
 
-    private List<FinancialEntry> entries = new ArrayList<FinancialEntry>();
-
     private Date effectiveDate;
 
-    // ----------------------------------------------------
+    private BigDecimal revenue;
 
-    public FinancialStatus(Date effectiveData) {
-        this.effectiveDate = effectiveData;
-    }
+    private BigDecimal profit;
 
     // ----------------------------------------------------
 
-    public void addEntries(FinancialEntry... entries) {
-        Collections.addAll(this.entries, entries);
+    public FinancialStatus(Date effectiveDate, BigDecimal revenue, BigDecimal profit) {
+        this.effectiveDate = effectiveDate;
+        this.revenue = revenue;
+        this.profit = profit;
     }
 
-    public List<FinancialEntry> getEntries() {
-        return entries;
-    }
+    // ----------------------------------------------------
 
     public Date getEffectiveDate() {
         return effectiveDate;
     }
 
     public BigDecimal getRevenue() {
-        BigDecimal balance = new BigDecimal(0);
-        for (FinancialEntry entry : entries) {
-            balance = balance.add(entry.getRevenue());
-        }
-        return balance;
+        return revenue;
     }
 
     public BigDecimal getProfit() {
-        BigDecimal balance = new BigDecimal(0);
-        for (FinancialEntry entry : entries) {
-            balance = balance.add(entry.getProfit());
-        }
-        return balance;
+        return profit;
     }
 
     // ----------------------------------------------------

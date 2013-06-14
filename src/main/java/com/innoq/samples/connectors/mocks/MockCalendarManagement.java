@@ -33,7 +33,7 @@ public class MockCalendarManagement extends BaseMock implements CalenderManageme
 
     private void initMock() {
         int day = rnd(30);
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 16; i++) {
             addAppointment(day);
             day += 1 + (random() * 3);
         }

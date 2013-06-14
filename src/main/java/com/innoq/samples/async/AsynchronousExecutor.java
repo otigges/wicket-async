@@ -8,6 +8,8 @@ public interface AsynchronousExecutor {
 
     <T> Future<T> submit(AsyncModel<T> model);
 
+    void prefetch(AsyncModel model);
+
     void destroy();
 
 }

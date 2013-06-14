@@ -1,9 +1,15 @@
 <html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.5-strict.dtd">
 <wicket:panel>
     <div class="lazy-loading-placeholder">
-       <h4>Data is still loading</h4>
+       <h4>
+           Data is still loading (
+           <wicket:container wicket:id="timer">[elapsed time]</wicket:container>
+           )
+       </h4>
 
-        <img src="/ajax-loader.gif"/>
+        <div class="progress-info">
+            <img src="/ajax-loader.gif"/>
+        </div>
 
     </div>
 

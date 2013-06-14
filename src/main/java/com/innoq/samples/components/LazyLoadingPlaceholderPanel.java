@@ -2,17 +2,20 @@ package com.innoq.samples.components;
 
 import com.innoq.samples.behaviors.LazyLoadBehavior;
 import com.innoq.samples.models.base.AsyncModel;
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractAjaxTimerBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.AbstractReadOnlyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.time.Duration;
-import org.apache.wicket.Component;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.text.NumberFormat;
 
 public class LazyLoadingPlaceholderPanel extends Panel {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LazyLoadingPlaceholderPanel.class);
+    private NumberFormat timeFormat = elapsedTimeFormat();
 
     private Component targetComponent;
 
@@ -23,12 +26,15 @@ public class LazyLoadingPlaceholderPanel extends Panel {
         this.targetComponent = targetComponent;
 
         setOutputMarkupId(true);
-        add(new AbstractAjaxTimerBehavior(Duration.milliseconds(200)) {
+        add(new AbstractAjaxTimerBehavior(refreshDuration()) {
             @Override
             protected void onTimer(AjaxRequestTarget target) {
                 update(target);
             }
         });
+        Label timer = new Label("timer", getTimerModel());
+        timer.setOutputMarkupId(true);
+        add(timer);
     }
 
     // ----------------------------------------------------
@@ -39,7 +45,7 @@ public class LazyLoadingPlaceholderPanel extends Panel {
             target.add(targetComponent);
             targetComponent.setVisible(true);
         } else {
-            target.add(this);
+            target.add(get("timer"));
         }
     }
 
@@ -49,6 +55,29 @@ public class LazyLoadingPlaceholderPanel extends Panel {
             throw new IllegalStateException("Found no async model in component: " + targetComponent);
         }
         return asyncModel.isDone();
+    }
+
+    // ----------------------------------------------------
+
+    private IModel<String> getTimerModel() {
+        return new AbstractReadOnlyModel<String>() {
+            private long startTime = System.currentTimeMillis();
+            @Override
+            public String getObject() {
+                double elapsed = (System.currentTimeMillis() - startTime) / 1000.;
+                return timeFormat.format(elapsed) + " s";
+            }
+        };
+    }
+
+    private NumberFormat elapsedTimeFormat() {
+        NumberFormat format = NumberFormat.getInstance(getLocale());
+        format.setMaximumFractionDigits(2);
+        return format;
+    }
+
+    private Duration refreshDuration() {
+        return Duration.milliseconds(150 + Math.random() * 80);
     }
 
 }

@@ -2,5 +2,7 @@ package com.innoq.samples.connectors;
 
 public interface FinancialService {
 
-    public FinancialStatus getFinancialStatus(String username);
+    FinancialStatus getFinancialStatus(String username);
+
+    FinancialDetails getFinancialDetails(String username);
 }

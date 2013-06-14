@@ -1,7 +1,7 @@
 package com.innoq.samples.components;
 
+import com.innoq.samples.connectors.FinancialDetails;
 import com.innoq.samples.connectors.FinancialEntry;
-import com.innoq.samples.connectors.FinancialStatus;
 import com.innoq.samples.models.base.DerivedModel;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -11,9 +11,9 @@ import org.apache.wicket.model.IModel;
 
 import java.util.List;
 
-public class FinancialStatusDetailsPanel extends Panel {
+public class FinancialDetailsPanel extends Panel {
 
-    public FinancialStatusDetailsPanel(String id, IModel<FinancialStatus> model) {
+    public FinancialDetailsPanel(String id, IModel<FinancialDetails> model) {
         super(id, model);
 
         ListView<FinancialEntry> view = new ListView<FinancialEntry>("entries", entryModel(model)) {
@@ -31,10 +31,10 @@ public class FinancialStatusDetailsPanel extends Panel {
 
     // ----------------------------------------------------
 
-    private IModel<List<FinancialEntry>> entryModel(IModel<FinancialStatus> model) {
-        return new DerivedModel<List<FinancialEntry>, FinancialStatus>(model) {
+    private IModel<List<FinancialEntry>> entryModel(IModel<FinancialDetails> model) {
+        return new DerivedModel<List<FinancialEntry>, FinancialDetails>(model) {
             @Override
-            protected List<FinancialEntry> derive(FinancialStatus target) {
+            protected List<FinancialEntry> derive(FinancialDetails target) {
                 return target.getEntries();
             }
         };

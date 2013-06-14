@@ -28,7 +28,7 @@ public class MockProjectManagement extends BaseMock implements ProjectManagement
     // ----------------------------------------------------
 
     private void initMock() {
-        for(int i=0; i < 15; i++) {
+        for(int i=0; i < 9; i++) {
             String customer = aCompany();
             data.add(new Project(projectID(customer), aTitle(), customer, aPhase(), aStatus()));
         }
