@@ -1,7 +1,6 @@
 package com.innoq.samples.components;
 
-import com.innoq.samples.behaviors.LazyLoadBehavior;
-import com.innoq.samples.models.base.AsyncModel;
+import com.innoq.samples.behaviors.LoadInBackgroundBehavior;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractAjaxTimerBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -50,11 +49,7 @@ public class LazyLoadingPlaceholderPanel extends Panel {
     }
 
     private boolean isDone() {
-        AsyncModel asyncModel = LazyLoadBehavior.findAsyncModel(targetComponent.getDefaultModel());
-        if (asyncModel == null) {
-            throw new IllegalStateException("Found no async model in component: " + targetComponent);
-        }
-        return asyncModel.isDone();
+        return LoadInBackgroundBehavior.findAsyncModel(targetComponent.getDefaultModel()).isDone();
     }
 
     // ----------------------------------------------------

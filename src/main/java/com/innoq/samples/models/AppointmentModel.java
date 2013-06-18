@@ -3,12 +3,12 @@ package com.innoq.samples.models;
 import com.innoq.samples.cache.CacheKey;
 import com.innoq.samples.connectors.Appointment;
 import com.innoq.samples.connectors.CalenderManagement;
-import com.innoq.samples.models.base.LoadableDetachableModel;
+import com.innoq.samples.models.base.DynamicModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.List;
 
-public class AppointmentModel extends LoadableDetachableModel<List<Appointment>> {
+public class AppointmentModel extends DynamicModel<List<Appointment>> {
 
     @SpringBean
     private CalenderManagement cm;

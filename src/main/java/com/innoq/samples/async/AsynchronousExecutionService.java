@@ -13,9 +13,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class AsynchronousExecutorImpl implements AsynchronousExecutor {
+public class AsynchronousExecutionService implements ExecutionService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AsynchronousExecutorImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AsynchronousExecutionService.class);
 
     private final Map<CacheKey, Future> runningTasks = new HashMap<CacheKey, Future>();
 
@@ -25,7 +25,7 @@ public class AsynchronousExecutorImpl implements AsynchronousExecutor {
 
     // ----------------------------------------------------
 
-    public AsynchronousExecutorImpl(ModelCache cache) {
+    public AsynchronousExecutionService(ModelCache cache) {
         this.cache = cache;
         this.executorService = Executors.newFixedThreadPool(5);
     }

@@ -1,6 +1,8 @@
 package com.innoq.samples.pages;
 
 import com.innoq.samples.WasyncSession;
+import com.innoq.samples.models.FinancialDetailsModel;
+import com.innoq.samples.models.base.AsyncModel;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
@@ -31,6 +33,9 @@ public class LoginPage extends BasePage {
     // ----------------------------------------------------
 
     public void onLogin(String user) {
+
+        AsyncModel.prefetch(new FinancialDetailsModel(user));
+
         WasyncSession.get().setUsername(user);
         setResponsePage(DashBoardPage.class);
     }

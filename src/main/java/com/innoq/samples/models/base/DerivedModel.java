@@ -7,8 +7,6 @@ public abstract class DerivedModel<T, S>  implements IModel<T> {
 
     private IModel<S> targetModel;
 
-    private S targetObject;
-
     private T loaded;
 
     // ----------------------------------------------------
@@ -18,27 +16,14 @@ public abstract class DerivedModel<T, S>  implements IModel<T> {
         this.targetModel = target;
     }
 
-    public DerivedModel(S target) {
-        Injector.get().inject(this);
-        this.targetObject = target;
-    }
-
     // ----------------------------------------------------
 
     @Override
     public final T getObject() {
         if (loaded == null) {
-            if (targetModel != null) {
-                loaded = derive(targetModel.getObject());
-            } else {
-                loaded = derive(targetObject);
-            }
+            loaded = derive(targetModel.getObject());
         }
-        if (loaded != null) {
-            return loaded;
-        } else {
-            return getDefault();
-        }
+        return loaded;
     }
 
     @Override
@@ -57,9 +42,5 @@ public abstract class DerivedModel<T, S>  implements IModel<T> {
     // ----------------------------------------------------
 
     protected abstract T derive(S target);
-
-    protected T getDefault() {
-        return null;
-    }
 
 }

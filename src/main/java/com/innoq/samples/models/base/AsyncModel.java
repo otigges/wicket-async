@@ -1,6 +1,6 @@
 package com.innoq.samples.models.base;
 
-import com.innoq.samples.async.AsynchronousExecutor;
+import com.innoq.samples.async.ExecutionService;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.concurrent.ExecutionException;
@@ -20,7 +20,7 @@ public class AsyncModel<T> extends ChainedLoadableModel<T> {
     private State state = State.NEW;
 
     @SpringBean
-    private AsynchronousExecutor executor;
+    private ExecutionService executor;
 
     // ----------------------------------------------------
 
@@ -28,8 +28,8 @@ public class AsyncModel<T> extends ChainedLoadableModel<T> {
         return new AsyncModel<S>(model).start();
     }
 
-    public static void prefetch(LoadableModel model) {
-        new AsyncModel(model).prefetch();
+    public static <S> void prefetch(LoadableModel<S> model) {
+        new AsyncModel<S>(model).prefetch();
     }
 
     // ----------------------------------------------------
@@ -68,9 +68,12 @@ public class AsyncModel<T> extends ChainedLoadableModel<T> {
     }
 
     public boolean isDone() {
-        checkState();
+        if (State.LOADING.equals(state) && future().isDone()) {
+            state = State.DONE;
+        }
         return State.DONE.equals(state);
     }
+
     // ----------------------------------------------------
 
     @Override
@@ -95,12 +98,6 @@ public class AsyncModel<T> extends ChainedLoadableModel<T> {
     }
 
     // ----------------------------------------------------
-
-    private void checkState() {
-        if (State.LOADING.equals(state) && future().isDone()) {
-            state = State.DONE;
-        }
-    }
 
     private void waitUntilDone() {
         try {

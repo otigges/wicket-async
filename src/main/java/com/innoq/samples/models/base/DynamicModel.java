@@ -1,8 +1,6 @@
 package com.innoq.samples.models.base;
 
-import org.apache.wicket.injection.Injector;
-
-public abstract class LoadableDetachableModel<T> extends AbstractLoadableModel<T> {
+public abstract class DynamicModel<T> extends AbstractLoadableModel<T> {
 	
     private T loaded;
 
@@ -13,11 +11,7 @@ public abstract class LoadableDetachableModel<T> extends AbstractLoadableModel<T
         if (loaded == null) {
             loaded = load();
         }
-        if (loaded != null) {
-            return loaded;
-        } else {
-            return getDefault();
-        }
+       return loaded;
     }
 
     @Override
@@ -28,9 +22,5 @@ public abstract class LoadableDetachableModel<T> extends AbstractLoadableModel<T
     // ----------------------------------------------------
 
     protected abstract T load();
-
-    protected T getDefault() {
-        return null;
-    }
 
 }

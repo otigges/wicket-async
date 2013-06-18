@@ -5,10 +5,10 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 public class CachedModel<T> extends ChainedLoadableModel<T> {
 
-    private T attached;
-
     @SpringBean
     private ModelCache cache;
+
+    private T attached;
 
     // ----------------------------------------------------
 
@@ -39,10 +39,7 @@ public class CachedModel<T> extends ChainedLoadableModel<T> {
         return attached;
     }
 
-    @Override
-    public void setObject(T object) {
-        throw new UnsupportedOperationException();
-    }
+    // ----------------------------------------------------
 
     @Override
     public void detach() {

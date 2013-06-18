@@ -4,7 +4,7 @@ import com.innoq.samples.models.base.AsyncModel;
 
 import java.util.concurrent.Future;
 
-public interface AsynchronousExecutor {
+public interface ExecutionService {
 
     <T> Future<T> submit(AsyncModel<T> model);
 

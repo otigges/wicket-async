@@ -4,12 +4,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="wicketApplication" class="com.innoq.samples.WicketApplication">
+    <bean id="wicketApplication" class="com.innoq.samples.WicketApplication" />
+
+    <!-- Cache configuration -->
+
+    <bean id="modelCache" class="com.innoq.samples.cache.ModelEhCache">
+        <constructor-arg value="classpath:ehcache.xml"/>
     </bean>
 
-    <bean id="modelCache" class="com.innoq.samples.cache.ModelCache"/>
+    <!-- Threading configuration -->
 
-    <bean id="executorService" class="com.innoq.samples.async.AsynchronousExecutorImpl"
+    <bean id="executorService" class="com.innoq.samples.async.AsynchronousExecutionService"
           destroy-method="destroy">
         <constructor-arg ref="modelCache"/>
     </bean>

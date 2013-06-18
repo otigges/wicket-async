@@ -1,9 +1,11 @@
 package com.innoq.samples.pages;
 
 import com.innoq.samples.WasyncSession;
+import com.innoq.samples.WicketApplication;
 import com.innoq.samples.cache.ModelCache;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
@@ -45,9 +47,8 @@ public class BasePage extends WebPage {
         logoutLink.setVisible(isLoggedIn());
         add(logoutLink);
 
-        Label usernameLabel = new Label("username", getUsername());
-        usernameLabel.setVisible(isLoggedIn());
-        add(usernameLabel);
+        add(new Label("username", getUsername()).setVisible(isLoggedIn()));
+        add(new BookmarkablePageLink("dashBoardLink", WicketApplication.get().getHomePage()).setVisible(isLoggedIn()));
         add(new Label("sessionSize", sessionSizeModel()));
         add(new Label("cacheSize", cacheSizeModel()));
     }
